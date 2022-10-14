@@ -37,7 +37,7 @@ jobs:
           prerelease: false
 
       - name: Merge main into dev branch
-        uses: thomaseizinger/create-pull-request@1.1.0
+        uses: thomaseizinger/create-pull-request@1.2.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -51,7 +51,7 @@ jobs:
       # the create-release action has an output `upload_url` output that you can use to upload assets
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ env.RELEASE_VERSION }}
 

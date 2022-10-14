@@ -10,37 +10,29 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"sqltools.connections": [{
-			"name": "Container database",
-			"driver": "PostgreSQL",
-			"previewLimit": 50,
-			"server": "localhost",
-			"port": 5432,
-			"database": "postgres",
-			"username": "postgres",
-			"password": "postgres"
-		}],
 		"cSpell.enabled": true,
-		"cSpell.language": "en,en-US,pt,pt_BR",
+		"cSpell.language": "en,en-US,pt,pt_BR"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg",
 		"esbenp.prettier-vscode",
 		"graphql.vscode-graphql",
 		"eamodio.gitlens",
 		"streetsidesoftware.code-spell-checker",
 		"streetsidesoftware.code-spell-checker-portuguese-brazilian",
+		"mikestead.dotenv"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [5000],
+	"forwardPorts": [5000, 5432],
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "yarn install && yarn migration:run",
+	// Use 'initializeCommand' to run commands locally before anything else.
+	"initializeCommand": "cp .env ./.devcontainer/.env",
+
+	// Use 'postStartCommand' to run commands after the container is started.
+	"postAttachCommand": "rm ./.devcontainer/.env && yarn install && yarn migration:run",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node"

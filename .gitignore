@@ -1,15 +1,18 @@
 .env
 .idea/
-.vscode/
+.vscode/*
+!.vscode/launch.json
 node_modules/
 build/
 tmp/
 temp/
+*.lock
 
 # Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+logs/
 
 .eslintcache

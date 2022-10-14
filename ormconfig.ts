@@ -1,29 +1,37 @@
 import { ConnectionOptions } from "typeorm";
-import dotenv from "dotenv";
 
-dotenv.config();
+const { DATABASE_URL, NODE_ENV } = process.env;
 
-const { DB_USER, DB_HOST, DB_PASSWORD, DB_NAME, NODE_ENV } = process.env;
+const isProduction = NODE_ENV === "production";
 
-const dir = NODE_ENV === "production" ? "build" : "src";
+const dir = isProduction ? "build" : "src";
 
-const config: ConnectionOptions = {
+let config: ConnectionOptions = {
   type: "postgres",
-  host: DB_HOST,
+  url: DATABASE_URL,
   port: 5432,
-  username: DB_USER,
-  password: DB_PASSWORD,
-  database: DB_NAME,
-  synchronize: NODE_ENV !== "production",
+  synchronize: false,
   logging: false,
-  entities: [`${dir}/entity/**/*.{ts,js}`],
-  migrations: [`${dir}/migration/**/*.{ts,js}`],
-  subscribers: [`${dir}/subscriber/**/*.{ts,js}`],
+  migrationsRun: true,
+  entities: [`${dir}/model/entity/**/*.{ts,js}`],
+  migrations: [`${dir}/model/migration/**/*.{ts,js}`],
+  subscribers: [`${dir}/model/subscriber/**/*.{ts,js}`],
   cli: {
-    migrationsDir: `${dir}/migration`,
-    entitiesDir: `${dir}/entity`,
-    subscribersDir: `${dir}/subscriber`
-  }
+    migrationsDir: `${dir}/model/migration`,
+    entitiesDir: `${dir}/model/entity`,
+    subscribersDir: `${dir}/model/subscriber`,
+  },
 };
+
+if (isProduction || !DATABASE_URL.includes("localhost")) {
+  config = {
+    ...config,
+    ...{
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    },
+  };
+}
 
 export = config;

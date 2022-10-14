@@ -1,18 +1,32 @@
 {
    "compilerOptions": {
-      "lib": [
-         "es5",
-         "es6",
-         "es2020"
-      ],
-      "target": "es2020",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "outDir": "./build",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "sourceMap": true,
-      "esModuleInterop": true,
+     "lib": ["es5", "es6", "es2021", "dom"],
+     "target": "es2020",
+     "module": "commonjs",
+     "moduleResolution": "node",
+     "outDir": "./build",
+     "emitDecoratorMetadata": true,
+     "experimentalDecorators": true,
+     "sourceMap": true,
+     "esModuleInterop": true,
+     "baseUrl": ".",
+     "paths": {
+       "logger": ["src/core/config/logger"],
+       "envs": ["src/core/config/constants"],
+       "utils": ["src/core/utils"],
+       "redisUtils": ["src/core/redis"],
+       "notification": ["src/core/notification"],
+       "@coreEnum/*": ["src/core/enum/*"],
+       "@entities/*": ["src/model/entities/*"],
+       "@enums/*": ["src/model/enums/*"],
+       "@interfaces/*": ["src/model/interfaces/*"],
+       "@repositories/*": ["src/model/repositories/*"],
+       "@validations/*": ["src/model/validations/*"],
+       "@args/*": ["src/schema/args/*"],
+       "@inputs/*": ["src/schema/inputs/*"],
+       "@outputs/*": ["src/schema/outputs/*"],
+       "@services/*": ["src/schema/services/*"]
+     }
    },
    "include": ["src/**/*"]
-}
+ }

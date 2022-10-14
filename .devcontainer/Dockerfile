@@ -1,7 +1,7 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.187.0/containers/typescript-node/.devcontainer/base.Dockerfile
 
 # Update the VARIANT arg in docker-compose.yml to pick a Node version: 16, 14, 12
-ARG VARIANT="16-buster"
+ARG VARIANT="16-bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 
 # Update args in docker-compose.yaml to set the UID/GID of the "node" user.
