@@ -51,7 +51,7 @@ jobs:
       # the create-release action has an output `upload_url` output that you can use to upload assets
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ env.RELEASE_VERSION }}
 
